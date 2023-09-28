@@ -169,12 +169,12 @@ def demix_base_mdxv3(config, model, mix, device):
 
 def demix_full_mdx23c(mix, device):
     model_folder = os.path.dirname(os.path.abspath(__file__)) + '/models/'
-    remote_url_mdxv3 = 'https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/MDX23C_D1581.ckpt'
-    remote_url_conf = 'https://raw.githubusercontent.com/Anjok07/ultimatevocalremovergui/new-patch-3-20/models/MDX_Net_Models/model_data/mdx_c_configs/model_2_stem_061321.yaml'
-    if not os.path.isfile(model_folder+'MDX23C_D1581.ckpt'):
-        torch.hub.download_url_to_file(remote_url_mdxv3, model_folder+'MDX23C_D1581.ckpt')
-    if not os.path.isfile(model_folder+'model_2_stem_061321.yaml'):
-        torch.hub.download_url_to_file(remote_url_conf, model_folder+'model_2_stem_061321.yaml')
+    remote_url_mdxv3 = 'https://github.com/TRvlvr/model_repo/releases/download/all_public_uvr_models/MDX23C-8KFFT-InstVoc_HQ.ckpt'
+    remote_url_conf = 'https://raw.githubusercontent.com/Anjok07/ultimatevocalremovergui/master/models/MDX_Net_Models/model_data/mdx_c_configs/model_2_stem_full_band_8k.yaml'
+    if not os.path.isfile(model_folder+'MDX23C-8KFFT-InstVoc_HQ.ckpt'):
+        torch.hub.download_url_to_file(remote_url_mdxv3, model_folder+'MDX23C-8KFFT-InstVoc_HQ.ckpt')
+    if not os.path.isfile(model_folder+'model_2_stem_full_band_8k.yaml'):
+        torch.hub.download_url_to_file(remote_url_conf, model_folder+'model_2_stem_full_band_8k.yaml')
 
 
     with open(model_folder + 'model_2_stem_061321.yaml') as f:
@@ -449,7 +449,7 @@ class EnsembleDemucsMDXMusicSeparationModel:
         model_vocals = model.cpu()
         del model_vocals
         
-        print('Processing vocals with MDXv3 demo model...')
+        print('Processing vocals with MDXv3 Release model...')
         sources3 = demix_full_mdx23c(mixed_sound_array.T, self.device)
         
         vocals3 = (match_array_shapes(sources3['Vocals'], mixed_sound_array.T) \
