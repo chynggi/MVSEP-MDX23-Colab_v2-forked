@@ -177,11 +177,11 @@ def demix_full_mdx23c(mix, device):
         torch.hub.download_url_to_file(remote_url_conf, model_folder+'model_2_stem_full_band_8k.yaml')
 
 
-    with open(model_folder + 'model_2_stem_061321.yaml') as f:
+    with open(model_folder + 'model_2_stem_full_band_8k.yaml') as f:
         config = ConfigDict(yaml.load(f, Loader=yaml.FullLoader))
 
     model = TFC_TDF_net(config)
-    model.load_state_dict(torch.load(model_folder+'MDX23C_D1581.ckpt'))
+    model.load_state_dict(torch.load(model_folder+'MDX23C-8KFFT-InstVoc_HQ.ckpt'))
     device = torch.device(device)
     model = model.to(device)
     model.eval()
